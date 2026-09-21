@@ -4,6 +4,17 @@
 
 #include "Person.h"
 
+#include <iostream>
+#include <ostream>
+
+bool Person::isValidAge(int age) {
+    if (age > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 string Person::getName() const {
     return name;
 }
@@ -21,7 +32,12 @@ void Person::setName(string name) {
 }
 
 void Person::setAge(int age) {
-    this->age = age;
+    if (isValidAge(age)) {
+        this->age = age;
+    } else {
+        cout<<"Invalid age: "<<age<<endl;
+    }
+
 }
 
 void Person::setHeight(double height) {
@@ -43,10 +59,24 @@ Person::Person(string name) {
 
 Person::Person(string name, int age, double height) {
     this->name = name;
-    this->age = age;
+
+    if (isValidAge(age)) {
+        this->age = age;
+    } else {
+        cout<<"Invalid age: "<<age<<endl;
+        cout<<"Assigning default value"<<endl;
+        this->age = 42;
+    }
+
     this->height = height;
 }
 
 void Person::hasBirthday() {
     age++;
+}
+
+void Person::print() const {
+    cout<<"Name: "<<name<<endl;
+    cout<<"Age: "<<age<<endl;
+    cout<<"Height: "<<height<<endl;
 }
