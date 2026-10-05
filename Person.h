@@ -12,6 +12,7 @@ private:
     string name;
     int age;
     double height;
+    char *nickname;
     bool isValidAge(int age);
 public:
     string getName() const;
@@ -22,9 +23,13 @@ public:
     void setHeight(double height);
     Person();
     Person(string name);
-    Person(string name, int age, double height);
+    Person(string name, int age, double height, char *nickname);
+    Person(const Person &person);
     void hasBirthday();
     void print() const;
+    ~Person();
+     Person& operator=(const Person &person);
+    friend ostream& operator<<(ostream &os, const Person &person);
 };
 
 
